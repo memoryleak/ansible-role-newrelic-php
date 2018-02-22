@@ -1,0 +1,7 @@
+---
+- name: Install all required packages
+  package:
+    name: "{{ item }}"
+    state: present
+  tags: ['package', 'packages']
+  with_items: "{{ required_packages }}"

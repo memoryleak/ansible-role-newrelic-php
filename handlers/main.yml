@@ -1,0 +1,16 @@
+---
+# handlers file for memoryleak.newrelic-php
+- name: apache-restarted-handler
+  service:
+    name: "{{ apache_service_name }}"
+    state: restarted
+
+- name: nginx-restarted-handler
+  service:
+    name: "{{ nginx_service_name }}"
+    state: restarted
+
+- name: php-restarted-handler
+  service:
+    name: "{{ php_service_name }}"
+    state: restarted

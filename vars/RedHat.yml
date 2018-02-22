@@ -1,0 +1,6 @@
+---
+apache_service_name: httpd
+php_service_name: php-fpm
+
+required_packages:
+  - newrelic-php5

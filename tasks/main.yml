@@ -1,0 +1,43 @@
+---
+# tasks file for memoryleak.newrelic-php
+# Include variables and define needed variables.
+- name: Include OS-specific variables.
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- name: Include OS-specific repositories.
+  include: "{{ ansible_os_family }}-repositories.yml"
+  tags: ['include']
+
+- name: Include packages installation task.
+  include: "packages.yml"
+  tags: ['include']
+
+- name: Execute New Relic install.
+  command: newrelic-install install
+  tags: ['command']
+  environment:
+    NR_INSTALL_SILENT: 1
+    NR_INSTALL_KEY: "{{newrelic_license_key}}"
+
+- name: Set New Relic ini configuration values.
+  lineinfile:
+    backup: false
+    line: "{{ item.name + ' = ' + item.value }}"
+    path: "{{ newrelic_ini_path }}"
+    regexp: "{{ ';?' + item.name + ' =(.*)?'}}"
+    state: present
+  tags: ['lineinfile']
+  with_items: "{{ newrelic_ini_config }}"
+  when: newrelic_ini_config is defined
+
+- name: apache-restarted-handler
+  service:
+    name: "{{ apache_service_name }}"
+    state: restarted
+  when: newrelic_restart_apache
+
+- name: php-restarted-handler
+  service:
+    name: "{{ php_service_name }}"
+    state: restarted
+  when: newrelic_restart_php
