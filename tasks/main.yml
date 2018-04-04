@@ -15,7 +15,7 @@
 - name: Execute New Relic install.
   command: newrelic-install install
   tags: ['command']
-  when: newrelic_license_key is defined
+  when: newrelic_execute_install
   environment:
     NR_INSTALL_SILENT: 1
     NR_INSTALL_KEY: "{{newrelic_license_key}}"
