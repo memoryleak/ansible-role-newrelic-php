@@ -13,6 +13,7 @@
   tags: ['include']
 
 - name: Execute New Relic install.
+  become: yes
   command: newrelic-install install
   tags: ['command']
   when: newrelic_execute_install
@@ -21,6 +22,7 @@
     NR_INSTALL_KEY: "{{newrelic_license_key}}"
 
 - name: Set New Relic ini configuration values.
+  become: yes
   lineinfile:
     backup: false
     line: "{{ item.name + ' = ' + item.value }}"
@@ -32,12 +34,14 @@
   when: newrelic_ini_config is defined
 
 - name: apache-restarted-handler
+  become: yes
   service:
     name: "{{ apache_service_name }}"
     state: restarted
   when: newrelic_restart_apache
 
 - name: php-restarted-handler
+  become: yes
   service:
     name: "{{ php_service_name }}"
     state: restarted
