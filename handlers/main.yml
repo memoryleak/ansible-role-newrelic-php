@@ -28,4 +28,4 @@
 - name: newrelic-daemon-start-handler
   service:
     name: newrelic-daemon
-    state: starteds
+    state: started
