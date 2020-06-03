@@ -32,6 +32,10 @@
   tags: ['lineinfile']
   with_items: "{{ newrelic_ini_config }}"
   when: newrelic_ini_config is defined
+  notify:
+    - newrelic-daemon-restart-handler
+    - newrelic-daemon-stop-handler
+    - newrelic-daemon-start-handler
 
 - name: apache-restarted-handler
   become: yes

@@ -14,3 +14,18 @@
   service:
     name: "{{ php_service_name }}"
     state: restarted
+
+- name: newrelic-daemon-restart-handler
+  service:
+    name: newrelic-daemon
+    state: restarted
+
+- name: newrelic-daemon-stop-handler
+  service:
+    name: newrelic-daemon
+    state: stopped
+
+- name: newrelic-daemon-start-handler
+  service:
+    name: newrelic-daemon
+    state: starteds

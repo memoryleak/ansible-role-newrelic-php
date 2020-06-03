@@ -2,6 +2,7 @@
 # defaults file for memoryleak.newrelic-php
 newrelic_restart_apache: false
 newrelic_restart_php: false
+newrelic_restart_daemon: false
 newrelic_ini_path: /etc/php.d/newrelic.ini 
 newrelic_execute_install: true
 newrelic_ini_config:
