@@ -17,7 +17,7 @@
   become: yes
   include: "download.yml"
   tags: ['include']
-  when: newrelic_specific_version <>  ""
+  when: newrelic_specific_version !=  ""
 
 - name: Execute New Relic instal  l.
   become: yes
