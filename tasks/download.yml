@@ -1,0 +1,29 @@
+---
+- name: Install wget
+  package:
+    name: wget
+    state: latest
+
+- name: Download newrelic-common
+  file_get:
+    url: "https://download.newrelic.com/pub/newrelic/el5/x86_64/newrelic-php5-common-{{newrelic_specific_version}}-1.noarch.rpm"
+    dest: "/tmp/newrelic-php5-common-{{newrelic_specific_version}}-1.noarch.rpm"
+
+- name: Download newrelic-daemons
+  file_get:
+    url: "https://download.newrelic.com/pub/newrelic/el5/x86_64/newrelic-daemon-{{newrelic_specific_version}}-1.x86_64.rpm"
+    dest: "/tmp/newrelic-daemon-{{newrelic_specific_version}}-1.x86_64.rpm"
+
+- name: Download newrelic-common
+  file_get:
+    url: "https://download.newrelic.com/pub/newrelic/el5/x86_64/newrelic-php5-{{newrelic_specific_version}}-1.x86_64.rpm"
+    dest: "/tmp/newrelic-php5-{{newrelic_specific_version}}-1.x86_64.rpm"
+
+
+- name: Install packages
+  yum:
+    name:
+      - "/tmp/newrelic-php5-common-{{newrelic_specific_version}}-1.noarch.rpm"
+      - "/tmp/newrelic-daemon-{{newrelic_specific_version}}-1.x86_64.rpm"
+      - "/tmp/newrelic-php5-{{newrelic_specific_version}}-1.x86_64.rpm"
+    state: present

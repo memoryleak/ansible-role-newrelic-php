@@ -11,8 +11,15 @@
 - name: Include packages installation task.
   include: "packages.yml"
   tags: ['include']
+  when: newrelic_specific_version == ""
 
-- name: Execute New Relic install.
+- name: Download specific packages
+  become: yes
+  include: "download.yml"
+  tags: ['include']
+  when: newrelic_specific_version <>  ""
+
+- name: Execute New Relic instal  l.
   become: yes
   command: newrelic-install install
   tags: ['command']

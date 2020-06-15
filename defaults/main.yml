@@ -11,3 +11,5 @@ newrelic_ini_config:
 
   - name: newrelic.appname
     value: "PHP Application"
+
+newrelic_specific_version: ""
